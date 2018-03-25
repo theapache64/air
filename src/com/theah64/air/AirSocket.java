@@ -58,7 +58,9 @@ public class AirSocket {
 
             final String channelId = jo.getString(KEY_CHANNEL_ID);
             final String songId = jo.getString(KEY_SONG_ID);
+
             try {
+
                 final Song song = Songs.getInstance().get(Songs.COLUMN_ID, songId);
 
                 final JSONObject joSong = new JSONObject();
@@ -66,6 +68,7 @@ public class AirSocket {
                 joSong.put(Songs.COLUMN_PATH, song.getPath());
 
                 final List<Session> channelListeners = listeners.get(channelId);
+
                 if (channelListeners != null) {
                     for (final Session lSession : channelListeners) {
                         try {
@@ -80,6 +83,7 @@ public class AirSocket {
             } catch (QueryBuilderException | SQLException e) {
                 e.printStackTrace();
             }
+
 
 
         }
